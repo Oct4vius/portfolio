@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="estilo.css">
+
+</head>
+<body>
+    <!-- TOP BAR -->
+    <div class="contenedor-header">
+        <header>
+            <div class="logo">
+                <a href="#">Octavio</a>
+            </div>
+            <nav id="nav" >
+                <ul>
+                    <li><a href="#inicio" onclick="seleccionar()">INICIO</a></li>
+                    <li><a href="#sobremi" onclick="seleccionar()">SOBRE MI</a></li>
+                    <li><a href="#skills" onclick="seleccionar()">HABILIDADES</a></li>
+                    <li><a href="#curriculum" onclick="seleccionar()">CURRICULUM</a></li>
+                    <li><a href="#portfolio" onclick="seleccionar()">PORTFOLIO</a></li>
+                    <li><a href="#contacto" onclick="seleccionar()">CONTACTO</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-responsive" onclick="mostrarOcultarMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            
+        </header>
+    </div>
+
+    <!-- INICIO -->
+    <section id="inicio" class="inicio" >
+
+        <div class="contenido-banner">
+
+            <div class="contenedor-img">
+               <img src="img/Octavio.png" alt=""> 
+            </div>
+            <h1>OCTAVIO LUPERÓN</h1>
+            <h2>Desarrollador Frontend</h2>
+            <div class="redes">
+                <a href="https://www.facebook.com/octavio.luperon/"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.instagram.com/octavio_luperon/"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/octavio-armando-luperón-vásquez-988589249/"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- SOBRE MI  -->
+    <section id="sobremi" class="sobremi">
+        <div class="contenido-section">
+            <h2>Sobre Mí</h2>
+            <p><span>Hola, soy Octavio Luperón.</span> Me considero una persona con mucha pasión y ambición de crecer profesionalmente. También me considero una persona con una gran capacidad de adaptarme a lo que se me presente. Me considero introvertido, pero aun así no me molesta comunicar las cosas si tengo que hacerlo.</p>
+
+            <div class="fila">
+                <!-- datos personales -->
+
+                <div class="col">
+                    <h3>Datos Personales</h3>
+                    <ul>
+                        <li>
+                            <strong>Cumpleaños</strong>
+                            1 de Octubre del 2002
+                        </li>
+                        <li>
+                            <strong>Telefono</strong>
+                            +1 829-849-1759
+                        </li>
+                        <li>
+                            <strong>Email</strong>
+                            armando2445@outlook.com
+                        </li>
+                        <li>
+                            <strong>Dirección</strong>
+                            Distrito Nacional, Republica Dominicana
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col">
+
+                    <h3>Intereses</h3>
+                    <div class="contenedor-intereses">
+                        <div class="intereses">
+                            <i class="fa-solid fa-gamepad"></i>
+                            <span>JUEGOS</span>
+                        </div>
+                        <div class="intereses">
+                            <i class="fa-solid fa-spoon"></i>
+                            <span>COCINA</span>
+                        </div>
+                        <div class="intereses">
+                            <i class="fa-solid fa-music"></i>
+                            <span>MUSICA</span>
+                        </div>
+                        <div class="intereses">
+                            <i class="fa-solid fa-film"></i>
+                            <span>PELÍCULAS</span>
+                        </div>
+                        <div class="intereses">
+                            <i class="fa-solid fa-person-swimming"></i>
+                            <span>DEPORTE</span>
+                        </div>
+                        <div class="intereses">
+                            <i class="fa-solid fa-book"></i>
+                            <span>LIBROS</span>
+                        </div>
+                        <div class="intereses">
+                            <i class="fa-brands fa-windows"></i>
+                            <span>WINDOWS</span>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            <button>
+                Descargar CV <i class="fa-solid fa-download"></i>
+                <span class="overlay" ></span>
+            </button>
+
+        </div>
+    </section>
+
+    <!-- HABILIDADES -->
+    <section class="skills" id="skills">
+        <div class="contenido-section">
+            <h2>Habilidades</h2>
+            <div class="fila">
+
+                <!-- Habilidades técnicas -->
+
+                <div class="col">
+
+                    <h3>Habilidades Técnicas</h3>
+
+                    <div class="skill">
+                        <span>Javascript</span>
+                        <div class="barra-skill ">
+                            <div class="progreso javascript ">
+                                <span>75%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill">
+                        <span>HTML & CSS</span>
+                        <div class="barra-skill">
+                            <div class="progreso  htmlcss ">
+                                <span>69%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill">
+                        <span>Python</span>
+                        <div class="barra-skill">
+                            <div class="progreso python ">
+                                <span>40%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill">
+                        <span>Angular</span>
+                        <div class="barra-skill">
+                            <div class="progreso angular ">
+                                <span>60%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill">
+                        <span>React</span>
+                        <div class="barra-skill">
+                            <div class="progreso react ">
+                                <span>70%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill">
+                        <span>C# & .NET</span>
+                        <div class="barra-skill">
+                            <div class="progreso cs">
+                                <span>50%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill">
+                        <span>SQL</span>
+                        <div class="barra-skill">
+                            <div class="progreso sql ">
+                                <span>55%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Habilidades Profesionales -->
+
+                <div class="col">
+                  
+                    <h3>Habilidades Profesionales</h3>
+                    <div class="skill">
+                        <span>Trabajo en equipo</span>
+                        <div class="barra-skill">
+                            <div class="progreso team-work">
+                                <span>85%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill">
+                        <span>Comunicación</span>
+                        <div class="barra-skill">
+                            <div class="progreso comunicacion">
+                                <span>80%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill">
+                        <span>Creatividad</span>
+                        <div class="barra-skill">
+                            <div class="progreso creatividad ">
+                                <span>70%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill">
+                        <span>Responsabilidad</span>
+                        <div class="barra-skill">
+                            <div class="progreso responsabilidad">
+                                <span>90%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill">
+                        <span>Dedicación</span>
+                        <div class="barra-skill">
+                            <div class="progreso dedicacion">
+                                <span>90%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- CURRICULUM -->
+    <section class="curriculum" id="curriculum" >
+        <div class="contenido-section">
+            <h2>Curriculum</h2>
+            <div class="fila">
+                <div class="col izquierda">
+                    <h3>Educación</h3>
+                    <div class="item izq">
+                        <h4>Tecnólogo de Desarrollo Software</h4>
+                        <span class="casa">Instituto Tecnólogico de las Américas</span>
+                        <span class="fecha">2020-2023</span>
+                        <p>En esta carrera me desarrolle mucho en el mundo de la programacion, aprendiendo diferentes ramas de las mismas como: desarrollo web, desarrollo de aplicaciones, mineria de datos e inteligencia artificial. Tambiém he desarrolado mucho el trabajo en equipo y la comunicación</p>
+                        <div class="conectori">
+                            <div class="circuloi">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col derecha ">
+                    <h3>Experiendia de trabajo</h3>
+                    <div class="item der">
+                        <h4>Soporte Técnico</h4>
+                        <span class="casa">Junta Central Electoral</span>
+                        <span class="fecha">Febrero - abril 2023</span>
+                        <p>En esta pasantía me encargaba de arreglar, darle mantenimiento a equipos electronicos y también dar apoyo en lo que sea que se necesitara.</p>
+                        <div class="conectord">
+                            <div class="circulod"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section class="portfolio" id="portfolio" >
+        <div class="contendio-seccion">
+            <h2>PORTFOLIO</h2>
+            <div class="galeria">
+                <div class="proyecto">
+                    <img src="img/blogApp.png">
+                    <div class="overlay">
+                        <h3>Desarrollador full stack</h3>
+                        <p>Blog App<p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contacto" id="contacto" >
+        <div class="contenido-seccion">
+            <h2>CONTACTO</h2>
+            <div class="fila">
+                <!-- Formulario -->
+                <div class="col">
+                    <form action="https://formsubmit.co/armando2445@outlook.com" method="POST">
+                        <input type="text" placeholder="Tú nombre" name="name">
+                        <input type="text" placeholder="Número telefónico" name="tel">
+                        <input type="text" placeholder="Dirección de correo" name="email">
+                        <input type="text" placeholder="Tema" name="asunto">
+                        <textarea name="message" id="" cols="30" rows="10" placeholder="Mensaje" ></textarea>
+                        <button>
+                            Enviar Mensaje<i class="fa-solid fa-paper-plane"></i>
+                            <span class="overlay" ></span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Mapa -->
+
+                <div class="col">
+                    <img src="img/MiUbicación.jpg">
+                    <div class="info">
+                        <ul>
+                            <li>
+                                <i class="fa-solid fa-location-dot"></i>
+                                Vasco Nuñez de Balboa 23, Miramar
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-mobile"></i>
+                                Llamame: +1 829-849-1759
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-envelope"></i>
+                                Email: armando2445@outlook.com
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+        <a href="#inicio" class="arriba">
+            <i class="fa-solid fa-angles-up"></i>
+        </a>
+        <div class="redes">
+            <a href="https://www.facebook.com/octavio.luperon/"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.instagram.com/octavio_luperon/"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/octavio-armando-luperón-vásquez-988589249/"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
