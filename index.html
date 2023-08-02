@@ -30,6 +30,10 @@
             <div class="nav-responsive" onclick="mostrarOcultarMenu()">
                 <i class="fa-solid fa-bars"></i>
             </div>
+
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+            <script type="text/javascript">emailjs.init('EgLdsAVq-VxhdHZxm')</script>
             
         </header>
     </div>
@@ -326,13 +330,13 @@
             <div class="fila">
                 <!-- Formulario -->
                 <div class="col">
-                    <form action="https://formsubmit.co/armando2445@outlook.com" method="POST">
-                        <input type="text" placeholder="Tú nombre" name="name">
-                        <input type="text" placeholder="Número telefónico" name="tel">
-                        <input type="text" placeholder="Dirección de correo" name="email">
-                        <input type="text" placeholder="Tema" name="asunto">
-                        <textarea name="message" id="" cols="30" rows="10" placeholder="Mensaje" ></textarea>
-                        <button>
+                    <form id="form">
+                        <input type="text" placeholder="Tú nombre" name="from_name" id="from_name" >
+                        <input type="text" placeholder="Número telefónico" name="tel_number" id="tel_number">
+                        <input type="text" placeholder="Dirección de correo" name="email_id" id="email_id">
+                        <input type="text" placeholder="Tema" name="subject" id="subject">
+                        <textarea name="message" id="message" id="" cols="30" rows="10" placeholder="Mensaje" ></textarea>
+                        <button id="button" type="submit" >
                             Enviar Mensaje<i class="fa-solid fa-paper-plane"></i>
                             <span class="overlay" ></span>
                         </button>
@@ -380,5 +384,6 @@
     </footer>
 
     <script src="script.js"></script>
+
 </body>
 </html>
