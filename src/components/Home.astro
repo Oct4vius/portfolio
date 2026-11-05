@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import Contact from './Contact.astro';
+import Projects from './Projects.astro';
+import Stack from './Stack.astro';
+import Credentials from './Credentials.astro';
+import { getContent, type Locale } from '../content';
+import { Changelog } from './Changelog';
+
+interface Props {
+  locale: Locale;
+}
+
+const content = getContent(Astro.props.locale);
+const { headings } = content;
+---
+
+<Base content={content}>
+  <Header content={content} />
+  <main class="page">
+    <Hero content={content} />
+
+    {/* === section: work === */}
+    <section id="work" class="section" aria-labelledby="work-heading">
+      <h2 id="work-heading" class="section-heading">{headings.work}</h2>
+      <Changelog client:visible jobs={content.jobs} />
+    </section>
+
+    {/* === section: projects === */}
+    <section id="projects" class="section" aria-labelledby="projects-heading">
+      <h2 id="projects-heading" class="section-heading">{headings.projects}</h2>
+      <Projects content={content} />
+    </section>
+
+    {/* === section: stack === */}
+    <section id="stack" class="section" aria-labelledby="stack-heading">
+      <h2 id="stack-heading" class="section-heading">{headings.stack}</h2>
+      <Stack content={content} />
+    </section>
+
+    {/* === section: credentials === */}
+    <section id="credentials" class="section" aria-labelledby="credentials-heading">
+      <h2 id="credentials-heading" class="section-heading">{headings.credentials}</h2>
+      <Credentials content={content} />
+    </section>
+
+    {/* === section: contact === */}
+    <section id="contact" class="section" aria-labelledby="contact-heading">
+      <h2 id="contact-heading" class="section-heading">{headings.contact}</h2>
+      <Contact content={content} />
+    </section>
+
+  </main>
+</Base>

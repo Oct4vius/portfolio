@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import { getContent } from '../content';
+import { withBase } from '../lib/paths';
+
+const en = getContent('en');
+const es = getContent('es');
+---
+
+<Base content={en} title={`${en.notFound.title} | ${es.notFound.title}`}>
+  <Header content={en} />
+  <main class="page">
+    <section class="missing" lang="en">
+      <h1>{en.notFound.title}</h1>
+      <p>{en.notFound.message}</p>
+      <a class="back" href={withBase('')}>{en.notFound.backLabel}</a>
+    </section>
+    <section class="missing" lang="es">
+      <h1>{es.notFound.title}</h1>
+      <p>{es.notFound.message}</p>
+      <a class="back" href={withBase('es/')}>{es.notFound.backLabel}</a>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .missing {
+    padding-top: 3rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    color: var(--muted);
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    margin-top: 0.5rem;
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 0.25em;
+    transition: text-decoration-color var(--dur-press) var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .back:hover {
+      text-decoration-color: var(--accent);
+    }
+  }
+</style>

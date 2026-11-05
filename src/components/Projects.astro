@@ -1,0 +1,170 @@
+---
+import type { SiteContent } from '../content';
+
+interface Props {
+  content: SiteContent;
+}
+
+const { projects, ui } = Astro.props.content;
+const [featured, ...others] = projects;
+---
+
+<article class="featured">
+  <header class="head">
+    <h3 class="title">{featured.name}</h3>
+    <span class="meta mono">{featured.period}</span>
+  </header>
+  <p class="summary">{featured.summary}</p>
+  <ul class="points">
+    {featured.points.map((point) => <li>{point}</li>)}
+  </ul>
+  <ul class="tags" aria-label={featured.name}>
+    {featured.stack.map((tag) => <li class="tag">{tag}</li>)}
+  </ul>
+  {
+    featured.repo && (
+      <a class="repo mono" href={featured.repo} target="_blank" rel="noopener">
+        {ui.viewRepo}
+        <span aria-hidden="true">↗</span>
+      </a>
+    )
+  }
+</article>
+
+{
+  others.map((project) => (
+    <article class="minor">
+      <header class="head">
+        <h3 class="title">{project.name}</h3>
+        <span class="meta mono">{project.period}</span>
+        {project.status && <span class="status mono">{project.status}</span>}
+      </header>
+      <p class="summary">{project.summary}</p>
+      <ul class="tags" aria-label={project.name}>
+        {project.stack.map((tag) => (
+          <li class="tag">{tag}</li>
+        ))}
+      </ul>
+    </article>
+  ))
+}
+
+<style>
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .featured {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--fg) 3%, var(--bg));
+  }
+
+  .minor {
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .minor .title {
+    font-size: 1rem;
+  }
+
+  .meta {
+    font-size: 0.8125rem;
+    color: var(--subtle);
+  }
+
+  .status {
+    font-size: 0.75rem;
+    padding: 0.0625rem 0.5rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    color: var(--accent);
+  }
+
+  .summary {
+    margin-top: 0.75rem;
+    color: var(--muted);
+  }
+
+  .minor .summary {
+    font-size: 0.9375rem;
+  }
+
+  .points {
+    margin-top: 1rem;
+    display: grid;
+    gap: 0.625rem;
+    font-size: 0.9375rem;
+    color: var(--fg);
+  }
+
+  .points li {
+    position: relative;
+    padding-left: 1.125rem;
+  }
+
+  .points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.8em;
+    width: 0.5rem;
+    height: 1px;
+    background: var(--subtle);
+  }
+
+  .tags {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .repo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    margin-top: 1.25rem;
+    padding: 0.5rem 0.875rem;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    color: var(--accent);
+    transition:
+      transform var(--dur-press) var(--ease-out),
+      background-color var(--dur-press) var(--ease-out);
+  }
+
+  .repo:active {
+    transform: scale(0.97);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .repo:hover {
+      background-color: color-mix(in srgb, var(--accent) 12%, transparent);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .repo {
+      transition: background-color var(--dur-press) var(--ease-out);
+    }
+  }
+</style>

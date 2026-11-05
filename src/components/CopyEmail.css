@@ -1,0 +1,80 @@
+.copy-email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.625rem 0.875rem;
+}
+
+.copy-email-address {
+  min-width: 0;
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 0.25em;
+  transition: text-decoration-color var(--dur-press) var(--ease-out);
+}
+
+.copy-email-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition:
+    transform var(--dur-press) var(--ease-out),
+    border-color var(--dur-press) var(--ease-out);
+}
+
+.copy-email-button[data-status='copied'] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.copy-email-button[data-status='failed'] {
+  color: var(--muted);
+}
+
+.copy-email-button:active {
+  transform: scale(0.97);
+}
+
+.copy-email-label {
+  display: inline-block;
+  animation: copy-email-swap 150ms var(--ease-out) both;
+}
+
+@keyframes copy-email-swap {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .copy-email-address:hover {
+    text-decoration-color: var(--accent);
+  }
+
+  .copy-email-button:hover {
+    border-color: var(--subtle);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copy-email-label {
+    animation-name: copy-email-fade;
+  }
+
+  @keyframes copy-email-fade {
+    from {
+      opacity: 0;
+    }
+  }
+}

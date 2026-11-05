@@ -1,0 +1,103 @@
+---
+import { Image } from 'astro:assets';
+import type { SiteContent } from '../content';
+import avatar from '../assets/octavio.jpg';
+
+interface Props {
+  content: SiteContent;
+}
+
+const { hero } = Astro.props.content;
+---
+
+<section class="hero" aria-labelledby="hero-name">
+  <div class="identity" data-reveal style="--i: 0">
+    {/* Only width is passed so Sharp keeps the portrait aspect; CSS does the square crop at 50% 30%. */}
+    <Image
+      class="avatar"
+      src={avatar}
+      alt={hero.avatarAlt}
+      width={56}
+      widths={[56, 112]}
+      sizes="56px"
+      format="webp"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div>
+      <h1 id="hero-name" class="name">{hero.name}</h1>
+      <p class="tagline">{hero.tagline}</p>
+    </div>
+  </div>
+
+  <p class="slogan" data-reveal style="--i: 1">{hero.slogan}</p>
+
+  <p class="badge" data-reveal style="--i: 2">
+    <span class="dot" aria-hidden="true"></span>
+    {hero.badge}
+  </p>
+</section>
+
+<style>
+  .hero {
+    padding-top: clamp(2.5rem, 9vw, 5rem);
+  }
+
+  .identity {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+  }
+
+  .avatar {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 30%;
+    box-shadow: 0 0 0 1px var(--border);
+    background: var(--border);
+  }
+
+  .name {
+    font-size: 1.375rem;
+    letter-spacing: -0.03em;
+  }
+
+  .tagline {
+    margin-top: 0.125rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .slogan {
+    margin-top: 1.75rem;
+    max-width: 28ch;
+    font-size: clamp(1.25rem, 4.2vw, 1.625rem);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.75rem;
+    padding: 0.3125rem 0.625rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: var(--fg);
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+</style>

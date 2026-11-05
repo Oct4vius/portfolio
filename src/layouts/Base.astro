@@ -1,0 +1,48 @@
+---
+import '@fontsource-variable/geist/wght.css';
+import '@fontsource-variable/geist-mono/wght.css';
+import '../styles/global.css';
+import type { Locale, SiteContent } from '../content';
+import { withBase } from '../lib/paths';
+
+interface Props {
+  content: SiteContent;
+  title?: string;
+}
+
+const { content, title = content.meta.title } = Astro.props;
+const { locale, meta } = content;
+
+const localePath: Record<Locale, string> = { en: withBase(''), es: withBase('es/') };
+const absolute = (path: string) => new URL(path, Astro.site).href;
+const canonical = absolute(localePath[locale]);
+const otherOgLocale = locale === 'en' ? 'es_DO' : 'en_US';
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0c0c0d" />
+    <title>{title}</title>
+    <meta name="description" content={meta.description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={absolute(localePath.en)} />
+    <link rel="alternate" hreflang="es" href={absolute(localePath.es)} />
+    <link rel="alternate" hreflang="x-default" href={absolute(localePath.en)} />
+    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={meta.ogLocale} />
+    <meta property="og:locale:alternate" content={otherOgLocale} />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

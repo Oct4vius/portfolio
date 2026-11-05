@@ -1,0 +1,92 @@
+---
+import type { SiteContent } from '../content';
+import { withBase } from '../lib/paths';
+import CopyEmail from './CopyEmail';
+
+interface Props {
+  content: SiteContent;
+}
+
+const { contact } = Astro.props.content;
+const cvHref = withBase('cv/' + contact.cvFile);
+---
+
+<div class="contact">
+  <p class="blurb">{contact.blurb}</p>
+
+  <CopyEmail
+    client:visible
+    email={contact.email}
+    copyLabel={contact.copyLabel}
+    copiedLabel={contact.copiedLabel}
+    copyFailedLabel={contact.copyFailedLabel}
+  />
+
+  <ul class="links">
+    <li><a href={contact.linkedin} rel="noopener">LinkedIn</a></li>
+    <li><a href={contact.github} rel="noopener">GitHub</a></li>
+  </ul>
+
+  <a class="cv" href={cvHref} download>{contact.cvLabel}</a>
+</div>
+
+<style>
+  .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .blurb {
+    max-width: 36ch;
+    color: var(--muted);
+  }
+
+  .links {
+    display: flex;
+    gap: 1.25rem;
+    margin-block: -0.5rem;
+    padding: 0;
+    list-style: none;
+    font-size: 0.9375rem;
+  }
+
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 0.25em;
+    transition: text-decoration-color var(--dur-press) var(--ease-out);
+  }
+
+  .cv {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition:
+      transform var(--dur-press) var(--ease-out),
+      border-color var(--dur-press) var(--ease-out);
+  }
+
+  .cv:active {
+    transform: scale(0.97);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .links a:hover {
+      text-decoration-color: var(--accent);
+    }
+
+    .cv:hover {
+      border-color: var(--subtle);
+    }
+  }
+</style>

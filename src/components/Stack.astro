@@ -1,0 +1,59 @@
+---
+import type { SiteContent } from '../content';
+
+interface Props {
+  content: SiteContent;
+}
+
+const { stack } = Astro.props.content;
+---
+
+<div class="groups">
+  {
+    stack.map((group) => (
+      <div class="group">
+        <h3 class="label mono">{group.label}</h3>
+        <ul class="tags">
+          {group.items.map((item) => (
+            <li class:list={['tag', group.level]}>{item}</li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .groups {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--subtle);
+  }
+
+  .tags {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.625rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  /* Emphasis by tone only, never by bar or number. */
+  .tag.daily {
+    color: var(--fg);
+    border-color: var(--subtle);
+  }
+
+  .tag.some {
+    color: var(--subtle);
+    border-style: dashed;
+  }
+</style>
