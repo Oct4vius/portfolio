@@ -36,3 +36,18 @@ for (const { path, status } of locales) {
     });
   });
 }
+
+test('find-in-page reaches bullets of closed changelog entries', async ({ page }) => {
+  const panel = page.locator('#changelog-panel-newfold');
+  await page.goto('/portfolio/');
+  await expect(panel).toHaveAttribute('hidden', 'until-found');
+  const closed = await panel.boundingBox();
+  expect(closed?.height ?? 0).toBe(0);
+
+  // A text fragment runs the same reveal as Ctrl+F does on a match (fresh load, not a hash change).
+  await page.goto('about:blank');
+  await page.goto('/portfolio/#:~:text=Measured%20page%20load%20speed');
+  await expect(panel).not.toHaveAttribute('hidden');
+  await expect(panel).toBeVisible();
+  await expect(page.getByRole('button', { name: /Newtech/ })).toHaveAttribute('aria-expanded', 'true');
+});

@@ -1,4 +1,4 @@
-import { useState, type CSSProperties } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import type { Job } from '../content/types';
 import './Changelog.css';
 
@@ -18,6 +18,8 @@ export function Changelog({ jobs }: Props) {
       if (!next.delete(id)) next.add(id);
       return next;
     });
+
+  const reveal = (id: string) => setOpen((prev) => (prev.has(id) ? prev : new Set(prev).add(id)));
 
   return (
     <ol className="changelog">
@@ -58,16 +60,53 @@ export function Changelog({ jobs }: Props) {
               </span>
               <span className="changelog-chevron" aria-hidden="true" />
             </button>
-            <div id={panelId} className="changelog-panel" hidden={!expanded}>
+            <Panel id={panelId} expanded={expanded} onFound={() => reveal(job.id)}>
               <ul>
                 {job.bullets.map((b) => (
                   <li key={b}>{b}</li>
                 ))}
               </ul>
-            </div>
+            </Panel>
           </li>
         );
       })}
     </ol>
+  );
+}
+
+interface PanelProps {
+  id: string;
+  expanded: boolean;
+  onFound: () => void;
+  children: ReactNode;
+}
+
+// Closed panels use hidden="until-found" so find-in-page (Ctrl+F) and text fragments search the
+// bullets and open the panel on a match. React only writes `hidden` as a boolean, so the value is
+// set here; browsers without support treat it as plain `hidden`.
+function Panel({ id, expanded, onFound, children }: PanelProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const onFoundRef = useRef(onFound);
+  onFoundRef.current = onFound;
+
+  useEffect(() => {
+    const el = ref.current!;
+    const handle = () => onFoundRef.current();
+    el.addEventListener('beforematch', handle);
+    return () => el.removeEventListener('beforematch', handle);
+  }, []);
+
+  useEffect(() => {
+    const el = ref.current!;
+    if (expanded) return;
+    // A match before hydration already removed the attribute; adopt the open state.
+    if (!el.hasAttribute('hidden')) onFoundRef.current();
+    else el.setAttribute('hidden', 'until-found');
+  }, [expanded]);
+
+  return (
+    <div ref={ref} id={id} className="changelog-panel" hidden={!expanded}>
+      {children}
+    </div>
   );
 }

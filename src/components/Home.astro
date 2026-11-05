@@ -26,6 +26,10 @@ const { headings } = content;
     <section id="work" class="section" aria-labelledby="work-heading">
       <h2 id="work-heading" class="section-heading">{headings.work}</h2>
       <Changelog client:visible jobs={content.jobs} />
+      {/* Makes closed panels searchable before the island hydrates; Changelog.tsx keeps it in sync after. */}
+      <script is:inline>
+        document.querySelectorAll('.changelog-panel[hidden]').forEach((el) => el.setAttribute('hidden', 'until-found'));
+      </script>
     </section>
 
     {/* === section: projects === */}

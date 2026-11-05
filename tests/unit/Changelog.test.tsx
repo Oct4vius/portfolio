@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Changelog } from '../../src/components/Changelog';
 import type { Job } from '../../src/content/types';
@@ -46,6 +46,31 @@ describe('Changelog', () => {
     expect(buttons[2]).toHaveAttribute('aria-expanded', 'true');
     await user.keyboard(' ');
     expect(buttons[2]).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('closed panels are searchable with find-in-page', () => {
+    setup();
+    expect(screen.getByText('bullet b1').closest('.changelog-panel')).toHaveAttribute('hidden', 'until-found');
+    expect(screen.getByText('bullet a1').closest('.changelog-panel')).not.toHaveAttribute('hidden');
+  });
+
+  it('a find-in-page match opens the panel', () => {
+    const { buttons } = setup();
+    const panel = screen.getByText('bullet c1').closest('.changelog-panel')!;
+    act(() => {
+      // What the browser does on a match: remove the attribute, then fire beforematch.
+      panel.removeAttribute('hidden');
+      panel.dispatchEvent(new Event('beforematch', { bubbles: true }));
+    });
+    expect(buttons[2]).toHaveAttribute('aria-expanded', 'true');
+    expect(panel).not.toHaveAttribute('hidden');
+  });
+
+  it('closing again restores until-found', async () => {
+    const { user, buttons } = setup();
+    await user.click(buttons[0]);
+    expect(buttons[0]).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.getByText('bullet a1').closest('.changelog-panel')).toHaveAttribute('hidden', 'until-found');
   });
 
   it('aria-controls points at panel', () => {

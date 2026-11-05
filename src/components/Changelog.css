@@ -134,8 +134,13 @@
   }
 }
 
+/* hidden="until-found" hides with content-visibility instead of display: none, so the box stays
+   in the layout. Drop its padding while closed and park it in the enter state, so opening fades
+   in like the display: none path above. Browsers without support fall back to the UA display: none. */
 .changelog-panel[hidden] {
-  display: none;
+  padding-bottom: 0;
+  opacity: 0;
+  transform: translateY(-4px);
 }
 
 .changelog-panel ul {
@@ -160,6 +165,9 @@
     .changelog-panel {
       transform: none;
     }
+  }
+  .changelog-panel[hidden] {
+    transform: none;
   }
   .changelog-chevron {
     transition: none;
