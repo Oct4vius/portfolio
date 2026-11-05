@@ -61,3 +61,18 @@ for (const path of ['/portfolio/', '/portfolio/es/']) {
     expect(scrollWidth).toBeLessThanOrEqual(360);
   });
 }
+
+for (const locale of ['en', 'es']) {
+  const path = locale === 'en' ? '/portfolio/' : '/portfolio/es/';
+  test(`link preview image for ${locale}`, async ({ page, request }) => {
+    await page.goto(path);
+    const image = await page.locator('meta[property="og:image"]').getAttribute('content');
+    expect(image).toBe(`https://oct4vius.github.io/portfolio/og/og-${locale}.png`);
+    await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
+    await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute('content', /Octavio Luperón/);
+
+    const res = await request.get(new URL(image!).pathname);
+    expect(res.status()).toBe(200);
+    expect(res.headers()['content-type']).toContain('image/png');
+  });
+}
