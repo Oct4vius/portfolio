@@ -8,9 +8,10 @@ import { withBase } from '../lib/paths';
 interface Props {
   content: SiteContent;
   title?: string;
+  noindex?: boolean;
 }
 
-const { content, title = content.meta.title } = Astro.props;
+const { content, title = content.meta.title, noindex = false } = Astro.props;
 const { locale, meta } = content;
 
 const localePath: Record<Locale, string> = { en: withBase(''), es: withBase('es/') };
@@ -28,6 +29,7 @@ const otherOgLocale = locale === 'en' ? 'es_DO' : 'en_US';
     <meta name="theme-color" content="#0c0c0d" />
     <title>{title}</title>
     <meta name="description" content={meta.description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="en" href={absolute(localePath.en)} />
     <link rel="alternate" hreflang="es" href={absolute(localePath.es)} />
